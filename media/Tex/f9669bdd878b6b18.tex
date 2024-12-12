@@ -1,0 +1,25 @@
+\documentclass[preview]{standalone}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\begin{document}
+\begin{center}
+\begin{lstlisting}[language=Python]
+def rob(int[] costs):
+    int n = costs.length
+    int[] dp = new int[n]
+
+    if n == 1:
+        return costs[n - 1]
+    
+    dp[n - 1] = costs[n - 1]
+    dp[n - 2] = max(costs[n - 2], costs[n - 1])
+
+    for (int i = n - 3; i >= 0; i--):
+        dp[i] = max(dp[i + 1], costs[i] + dp[i + 2])
+    
+    return dp[0]
+\end{lstlisting}
+\end{center}
+\end{document}

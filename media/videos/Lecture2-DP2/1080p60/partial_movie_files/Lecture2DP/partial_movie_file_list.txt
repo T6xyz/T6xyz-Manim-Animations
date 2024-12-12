@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/t6xyz/Desktop/T6xyz-Lectures/DP-lectures/media/videos/Lecture2-DP2/1080p60/partial_movie_files/Lecture2DP/3529212410_3243906306_223132457.mp4'
+file 'file:/Users/t6xyz/Desktop/T6xyz-Lectures/DP-lectures/media/videos/Lecture2-DP2/1080p60/partial_movie_files/Lecture2DP/3040924799_3636024140_3539520467.mp4'
+file 'file:/Users/t6xyz/Desktop/T6xyz-Lectures/DP-lectures/media/videos/Lecture2-DP2/1080p60/partial_movie_files/Lecture2DP/3040924799_3446390816_3631127911.mp4'
+file 'file:/Users/t6xyz/Desktop/T6xyz-Lectures/DP-lectures/media/videos/Lecture2-DP2/1080p60/partial_movie_files/Lecture2DP/3040924799_3485225438_4131132508.mp4'
+file 'file:/Users/t6xyz/Desktop/T6xyz-Lectures/DP-lectures/media/videos/Lecture2-DP2/1080p60/partial_movie_files/Lecture2DP/3040924799_3804813817_2807959828.mp4'
+file 'file:/Users/t6xyz/Desktop/T6xyz-Lectures/DP-lectures/media/videos/Lecture2-DP2/1080p60/partial_movie_files/Lecture2DP/3040924799_4003373897_833048336.mp4'

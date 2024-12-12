@@ -1,0 +1,19 @@
+\documentclass[preview]{standalone}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\begin{document}
+\begin{center}
+\begin{lstlisting}[language=Python]
+def F(int n):
+    if (n == 0):
+        return 0
+
+    if (n == 1):
+        return 1
+
+    return F(n - 1) + F(n - 2)
+\end{lstlisting}
+\end{center}
+\end{document}
