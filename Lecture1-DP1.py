@@ -10,7 +10,7 @@ class LectureDP1(Scene):
         introText = Text("Intro To Dynamic Programming",color = WHITE).scale(0.75)
         introBox = SurroundingRectangle(introText, color = BLUE, buff = MED_LARGE_BUFF)
         introObj = VGroup(introText, introBox)
-        introObj.shift(2.5 * UP)
+        introObj.shift(2.25 * UP)
 
         self.play(FadeIn(introObj))
         self.wait(3)
