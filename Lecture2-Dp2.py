@@ -1653,4 +1653,225 @@ def func(int[][] A):
         self.play(FadeOut(end))
         self.wait(2)
 
-        # LeetCode binary tree dp
+        # LeetCode binary tree DP
+
+        # 1. Read problem
+        # 2. discuss relevance of in-order traversal
+        # 3. discuss why each internal node has 2 children
+        # 4. show animation of lead node partition
+        # 5. discuss where DP can come into play
+        # 6. Discuss DP solution
+        # 7. Code
+        # 8. time complexity analysis
+        btQuestion = Tex(r"""\begin{align*}
+&\text{You are given an array of positive integers leafs, where leafs[i] represents a leaf node in a binary tree and}\\
+&\text{leafs corresponds to an in-order traversal of the leaf nodes. For each non-leaf node, its value consists }\\
+&\text{of the product of the largest leaf value in the left subtree and the largest leaf value in the right subtree. Among }\\
+&\text{all possible binary trees, return the minimum sum of all non-leaf nodes.}\\
+\\
+&\text{NOTE: Each node has either 0 or 2 children}
+\end{align*}""",color = WHITE).scale(0.45)
+        btQuestionBox = SurroundingRectangle(btQuestion, color = BLUE, buff = MED_LARGE_BUFF)
+        
+        btQuestionObj = VGroup(btQuestion, btQuestionBox)
+        btQuestionObj.shift(2 * UP)
+        self.play(FadeIn(btQuestionObj))
+        self.wait(8)
+
+        # 2. show the inorder traversal of the leafs is left -> right
+        l = [Square(side_length = 1, stroke_width = 1.0) for _ in range(3)]
+        leafs = VGroup(*l).scale(1.0)
+        leafs.arrange(direction = RIGHT, buff = 0)
+        c0 = MathTex(r"6", color = BLUE).scale(0.75)
+        c0.move_to(l[0].get_center())
+        c1 = MathTex(r"2", color = BLUE).scale(0.75)
+        c1.move_to(l[1].get_center())
+        c2 = MathTex(r"4", color = BLUE).scale(0.75)
+        c2.move_to(l[2].get_center())
+        name1 = Text("leafs =").scale(0.65)
+        name1.align_to(leafs, LEFT)
+        name1.shift(1.4 * LEFT)
+
+        leafs.add(c0, c1, c2, name1)
+        leafs.move_to(ORIGIN + DOWN / 2)
+
+        self.play(FadeOut(btQuestionObj))
+        self.play(FadeIn(leafs))
+        self.play(leafs.animate.shift(2.5 * UP))
+        self.wait(3)
+
+        # create sample binary tree 1
+        n1 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        n1.set_fill(color = BLUE, opacity = 0.9)
+
+        n2 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        n2.set_fill(color = BLUE, opacity = 0.9)
+
+        c3 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        c3.set_fill(color = BLUE, opacity = 0.9)
+
+        c4 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        c4.set_fill(color = BLUE, opacity = 0.9)
+
+        c5 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        c5.set_fill(color = BLUE, opacity = 0.9)
+
+
+        l1 = MathTex("6", color = BLACK).scale(0.7)
+        l2 = MathTex("2", color = BLACK).scale(0.7)
+        l3 = MathTex("4", color = BLACK).scale(0.7)
+
+        n3 = VGroup(c3, l1)
+        n4 = VGroup(c4, l2)
+        n5 = VGroup(c5, l3)
+
+        n2.move_to(n1.get_center() + DOWN + 2 * LEFT)
+        n3.move_to(n1.get_center() + DOWN + 2 * RIGHT)
+        n4.move_to(n2.get_center() + DOWN + LEFT)
+        n5.move_to(n2.get_center() + DOWN + RIGHT)
+
+        e1 = Line(start = n1, end = n2, stroke_width = 1)
+        e2 = Line(start = n1, end = n3, stroke_width = 1)
+        e3 = Line(start = n2, end = n4, stroke_width = 1)
+        e4 = Line(start = n2, end = n5, stroke_width = 1)
+
+        bt1 = VGroup(n1, n2, n3, n4, n5, e1, e2, e3, e4, l1, l2, l3)
+        bt1.move_to(ORIGIN + DOWN / 2)
+        self.play(FadeIn(bt1))
+        self.wait(3)
+        self.play(c4[0].animate.set_fill(RED))
+        self.play(c5[0].animate.set_fill(RED))
+        self.play(c3[0].animate.set_fill(RED))
+        self.wait(2)
+        self.play(c4[0].animate.set_fill(BLUE))
+        self.play(c5[0].animate.set_fill(BLUE))
+        self.play(c3[0].animate.set_fill(BLUE))
+        
+        self.wait(3)
+        self.play(FadeOut(bt1))
+
+        # create sample binary tree 2
+        n1 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        n1.set_fill(color = BLUE, opacity = 0.9)
+
+        c2 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        c2.set_fill(color = BLUE, opacity = 0.9)
+
+        n3 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        n3.set_fill(color = BLUE, opacity = 0.9)
+
+        c4 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        c4.set_fill(color = BLUE, opacity = 0.9)
+
+        c5 = Circle(color = WHITE, radius = 0.35, stroke_width = 1.4)
+        c5.set_fill(color = BLUE, opacity = 0.9)
+
+
+        l1 = MathTex("6", color = BLACK).scale(0.7)
+        l2 = MathTex("2", color = BLACK).scale(0.7)
+        l3 = MathTex("4", color = BLACK).scale(0.7)
+
+        n2 = VGroup(c2, l1)
+        n4 = VGroup(c4, l2)
+        n5 = VGroup(c5, l3)
+
+        n2.move_to(n1.get_center() + DOWN + 2 * LEFT)
+        n3.move_to(n1.get_center() + DOWN + 2 * RIGHT)
+        n4.move_to(n3.get_center() + DOWN + LEFT)
+        n5.move_to(n3.get_center() + DOWN + RIGHT)
+
+        e1 = Line(start = n1, end = n2, stroke_width = 1)
+        e2 = Line(start = n1, end = n3, stroke_width = 1)
+        e3 = Line(start = n3, end = n4, stroke_width = 1)
+        e4 = Line(start = n3, end = n5, stroke_width = 1)
+
+        bt2 = VGroup(n1, n2, n3, n4, n5, e1, e2, e3, e4, l1, l2, l3)
+        bt2.move_to(ORIGIN + DOWN / 2 + LEFT / 2)
+        self.play(FadeIn(bt2))
+        self.wait(3)
+        self.play(c2[0].animate.set_fill(RED))
+        self.play(c4[0].animate.set_fill(RED))
+        self.play(c5[0].animate.set_fill(RED))
+        self.wait(2)
+        self.play(c2[0].animate.set_fill(BLUE))
+        self.play(c4[0].animate.set_fill(BLUE))
+        self.play(c5[0].animate.set_fill(BLUE))
+        self.play(FadeOut(bt2))
+
+        self.wait()
+
+        inorderText = Tex(r"""\begin{align*}
+&\text{inorder(node.left)}\\
+&\text{print(node.val)}\\
+&\text{inorder(node.right)}\\
+\end{align*}""",color = WHITE).scale(0.65)
+        inorderText.move_to(ORIGIN + DOWN / 2)
+        self.play(FadeIn(inorderText))
+        self.wait(2)
+        self.play(FadeOut(inorderText))
+
+        self.play(leafs.animate.shift(3.5 * DOWN))
+        self.wait(3)
+
+        helperText = Tex(r"""\begin{align*}
+&\text{We know each node has either 0 or 2 children. A leaf node is a node with 0 children,}\\
+&\text{therefore, an internal node must have 2 children i.e two subtrees!}\\
+\end{align*}""").scale(0.5)
+        helperText.move_to(ORIGIN + UP)
+        self.play(FadeIn(helperText))
+        self.wait(6)
+        self.play(FadeOut(helperText))
+
+        node = Circle(color = WHITE, radius = 0.5, stroke_width = 1.4)
+        node.set_fill(color = BLUE, opacity = 0.9)
+
+        l1 = [Square(side_length = 1, stroke_width = 1.0) for _ in range(2)]
+        l2 = [Square(side_length = 1, stroke_width = 1.0) for _ in range(1)]
+
+        left = VGroup(*l1).scale(1.0)
+        left.arrange(direction = RIGHT, buff = 0)
+        right = VGroup(*l2).scale(1.0)
+        right.arrange(direction = RIGHT, buff = 0)
+
+        c0 = MathTex(r"6", color = BLUE).scale(0.75)
+        c0.move_to(l1[0].get_center())
+        c1 = MathTex(r"2", color = BLUE).scale(0.75)
+        c1.move_to(l1[1].get_center())
+        c2 = MathTex(r"4", color = BLUE).scale(0.75)
+        c2.move_to(l2[0].get_center())
+
+        left.add(c0, c1)
+        right.add(c2)
+
+        left.move_to(node.get_center() + 2 * DOWN + 2 * LEFT)
+        right.move_to(node.get_center() + 2 * DOWN + 2 * RIGHT)
+
+        e1 = Line(start = node, end = left.get_center() + UP / 2, stroke_width = 1.2)
+        e2 = Line(start = node, end = right.get_center() + UP / 2, stroke_width = 1.2)
+
+        p1 = VGroup(node, e1, e2, left, right)
+        p1.move_to(ORIGIN)
+        self.play(FadeOut(leafs))
+        self.play(FadeIn(p1))
+
+        tempScore = MathTex(r"\text{score = 6 * 4}").scale(0.7)
+        tempScore.move_to(node.get_center() + 3 * LEFT + UP)
+
+        temp = VGroup(l1[0], l1[1])
+
+        self.play(temp.animate.set_fill(color = WHITE, opacity = 0.2))
+        self.wait(2)
+        self.play(temp.animate.set_fill(color = WHITE, opacity = 0))
+        self.play(FadeIn(tempScore[0][0:7]))
+        self.wait(2)
+        self.play(l2[0].animate.set_fill(color = WHITE, opacity = 0.2))
+        self.wait(2)
+        self.play(l2[0].animate.set_fill(color = WHITE, opacity = 0))
+        self.play(FadeIn(tempScore[0][7:10]))
+        self.wait()
+
+        final = MathTex("24", color = BLACK).scale(0.7)
+        final.move_to(node.get_center())
+        self.play(FadeOut(tempScore))
+        self.play(FadeIn(final))
+        self.wait(3)
